@@ -27,3 +27,25 @@ $('#page_dashboard').live('pageshow',function(){
   }
   catch (error) { alert("page_dashboard - " + error); }
 });
+
+$('#button_logout').live("click",function(){
+try {
+ $.ajax({
+     url: "http://10.0.2.2/my_drupal_site/?q=my_services/user/logout.json",
+     type: 'post',
+     dataType: 'json',
+     error: function (XMLHttpRequest, textStatus, errorThrown) {
+       alert('button_logout - failed to logout');
+       console.log(JSON.stringify(XMLHttpRequest));
+       console.log(JSON.stringify(textStatus));
+       console.log(JSON.stringify(errorThrown));
+     },
+     success: function (data) {
+       alert("You have been logged out.");
+       $.mobile.changePage("index.html",{reloadPage:true},{allowSamePageTranstion:true},{transition:'none'});
+     }
+ });
+}
+catch (error) { alert("button_logout - " + error); }
+return false;
+});
