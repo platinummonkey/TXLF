@@ -20,6 +20,7 @@ function page(toPage) {
 $('#tab-bar a').on('click', function(e){
 	e.preventDefault();
 	var nextPage = $(e.target.hash);
-	$("#pages .current").removeClass("current");
-	nextPage.addClass("current");
+	//$("#pages .current").removeClass("current");
+	//nextPage.addClass("current");
+  page(nextPage);
 });
