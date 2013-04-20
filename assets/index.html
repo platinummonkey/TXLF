@@ -1,53 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.2.0.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.2.0.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
-        <title>Hello World</title>
-    </head>
-    <body>
-            <div data-role="page" id="page_dashboard">
-		<script type="text/javascript" charset="utf-8" src="js/dashboard.js"></script>
-                <!--<script type="text/javascript" charset="utf-8" src="js/login.js"></script>-->
-		<!--<script type="text/javascript" src="barcodescanner.js"></script>-->
-
- 		<div data-role="header">
-		   <h1>Dashboard</h1>
- 		</div><!-- /header -->
-
-		 <div data-role="content">
-  		 <p><a href="#page_login" data-role="button" id="button_login">Login</a></p>
-		   <p><a href="#" data-role="button" id="button_logout">Logout</a></p>
-		 </div><!-- /content -->
-
-            </div><!-- /page -->
-            <div data-role="page" id="page_login">
-                <script type="text/javascript" charset="utf-8" src="js/login.js"></script>
-                
-                  <div data-role="header">
-                    <h1>Login</h1>
-                  </div><!-- /header -->
-                
-                  <div data-role="content" class='content'>
-                    <div>
-                      <label for="page_login_name">Username</label>
-                      <input type="text" id="page_login_name" />
-                    </div>
-                    <div>
-                      <label for="page_login_pass">Password</label>
-                      <input type="password" id="page_login_pass" />
-                    </div>
-                    <fieldset>
-                      <div><button type="button" data-theme="b" id="page_login_submit">Login</button></div>
-                    </fieldset>
-                </div><!-- /content -->
-            </div><!-- /page -->
-     </body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <script src="js/jquery-2.0.0.min.js"></script>
+    <!--script src="http://debug.phonegap.com/target/target-script-min.js#txlf-testing"></script-->
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    <script src="js/iscroll-lite.js"></script>
+    <script src="js/app.js"></script>
+    <title>Texas Linux Festival 2013</title>
+  </head>
+  <body>
+    <header>Texas Linux Festival 2013</header>
+    <div id="wrapper">
+      <div id="main-content">
+        <div id="pages">
+        <div id="venue-content">
+          test
+        </div>
+        <div id="program-content">
+          <div id="timeslot-1">
+              <h4>Saturday 10:15-11:10</h4>
+              <ul id="sessions-ul">
+                <li class="track-a"><a class="avatar" href="#"><img src="img/logo.png" width="50px" height="50px" alt="some image"></a><a class="avatar" href="#"><h3 class="talk_title">This is the title, this blas blash baslh asdf asdf df dasf asdf</h3><span class="talk_speaker">Some speaker (company)</span></a><img src="img/track-a.png" class="track-bg"></li>
+                <li class="track-a"><a class="avatar" href="#"><img src="img/logo.png" width="50px" height="50px" alt="some image"></a><a class="avatar" href="#"><h3 class="talk_title">This is the title, this blas blash baslh asdf asdf df dasf asdf</h3><span class="talk_speaker">Some speaker (company)</span></a><img src="img/track-b.png" class="track-bg"></li>
+                <li class="track-a"><a class="avatar" href="#"><img src="img/logo.png" width="50px" height="50px" alt="some image"></a><a class="avatar" href="#"><h3 class="talk_title">This is the title, this blas blash baslh asdf asdf df dasf asdf</h3><span class="talk_speaker">Some speaker (company)</span></a><img src="img/track-c.png" class="track-bg"></li>
+                <li class="track-a"><a class="avatar" href="#"><img src="img/logo.png" width="50px" height="50px" alt="some image"></a><a class="avatar" href="#"><h3 class="talk_title">This is the title, this blas blash baslh asdf asdf df dasf asdf</h3><span class="talk_speaker">Some speaker (company)</span></a><img src="img/track-d.png" class="track-bg"></li>
+                <li class="track-a"><a class="avatar" href="#"><img src="img/logo.png" width="50px" height="50px" alt="some image"></a><a class="avatar" href="#"><h3 class="talk_title">This is the title, this blas blash baslh asdf asdf df dasf asdf</h3><span class="talk_speaker">Some speaker (company)</span></a><img src="img/track-e.png" class="track-bg"></li>
+              </ul>
+              <h4>Saturday 10:15-11:10</h4>
+              <ul id="sessions-ul">
+                <li class="track-a"><a class="avatar" href="#"><img src="img/logo.png" width="50px" height="50px" alt="some image"></a><a class="avatar" href="#"><h3 class="talk_title">This is the title, this blas blash baslh asdf asdf df dasf asdf</h3><span class="talk_speaker">Some speaker (company)</span></a><img src="img/track-a.png" class="track-bg"></li>
+                <li class="track-a"><a class="avatar" href="#"><img src="img/logo.png" width="50px" height="50px" alt="some image"></a><a class="avatar" href="#"><h3 class="talk_title">This is the title, this blas blash baslh asdf asdf df dasf asdf</h3><span class="talk_speaker">Some speaker (company)</span></a><img src="img/track-b.png" class="track-bg"></li>
+                <li class="track-a"><a class="avatar" href="#"><img src="img/logo.png" width="50px" height="50px" alt="some image"></a><a class="avatar" href="#"><h3 class="talk_title">This is the title, this blas blash baslh asdf asdf df dasf asdf</h3><span class="talk_speaker">Some speaker (company)</span></a><img src="img/track-c.png" class="track-bg"></li>
+                <li class="track-a"><a class="avatar" href="#"><img src="img/logo.png" width="50px" height="50px" alt="some image"></a><a class="avatar" href="#"><h3 class="talk_title">This is the title, this blas blash baslh asdf asdf df dasf asdf</h3><span class="talk_speaker">Some speaker (company)</span></a><img src="img/track-d.png" class="track-bg"></li>
+                <li class="track-a"><a class="avatar" href="#"><img src="img/logo.png" width="50px" height="50px" alt="some image"></a><a class="avatar" href="#"><h3 class="talk_title">This is the title, this blas blash baslh asdf asdf df dasf asdf</h3><span class="talk_speaker">Some speaker (company)</span></a><img src="img/track-e.png" class="track-bg"></li>
+              </ul>
+            </div>
+          </div>
+          <script id="tmpl-sessions" type="text/x-jquery-tmpl">
+          <div id="timeslot-${timeslot}">
+            <h3>${timeslot_pretty}</h3>
+            <div id="track-${track}">
+              <ul id="sessions-ul">
+              </ul>
+              <script id="tmpl-sessions-${track}" type="text/x-jquery-tmpl">
+                  <!-- User Pic | Talk Title
+                                  Speaker Name (Company) -->
+                  <li><a class="avatar" href="${talk_url}"><img src="${user_image_url}" alt="${user_name}"><span class="vertical_divider"></span><span class="talk_title">${talk_title}</span><span class="talk_speaker">${speaker}</span></a>
+                  </li>
+              </script>
+            </div>
+          </div>
+          </script>
+        </div>
+        <div id="scan_qrcode">
+        </div>
+        <div id="social-content">
+        </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <ul id="tab-bar">
+        <li><a href="#venue-content">Venue</a></li>
+        <li><a href="#program-content">Program</a></li>
+        <li><a href="#scan_qrcode">Scan ID</a></li>
+        <li><a href="#social-content">Social</a></li>
+      </ul>
+    </footer>
+  </body>
 </html>
