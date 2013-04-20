@@ -6,7 +6,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <script src="http://debug.phonegap.com/target/target-script-min.js#txlf-testing"></script>
+    <script src="js/jquery-2.0.0.min.js"></script>
+    <!--script src="http://debug.phonegap.com/target/target-script-min.js#txlf-testing"></script-->
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script src="js/iscroll-lite.js"></script>
     <script src="js/app.js"></script>
@@ -16,6 +17,7 @@
     <header>Texas Linux Festival 2013</header>
     <div id="wrapper">
       <div id="main-content">
+        <div id="pages">
         <div id="venue-content">
           test
         </div>
@@ -59,14 +61,15 @@
         </div>
         <div id="social-content">
         </div>
+        </div>
       </div>
     </div>
     <footer>
       <ul id="tab-bar">
-        <li><a href="#">Venue</a></li>
-        <li><a href="#">Program</a></li>
-        <li><a href="#">Scan ID</a></li>
-        <li><a href="#">Social</a></li>
+        <li><a href="#venue-content">Venue</a></li>
+        <li><a href="#program-content">Program</a></li>
+        <li><a href="#scan_qrcode">Scan ID</a></li>
+        <li><a href="#social-content">Social</a></li>
       </ul>
     </footer>
   </body>

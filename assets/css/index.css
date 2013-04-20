@@ -82,6 +82,38 @@ h1{
     -webkit-touch-callout:none;
 }
 
+#pages {
+  position:relative;
+}
+
+#pages > div {
+  display: none;
+  position: absolute;
+  top:0; left:0;
+  width:100%;
+}
+
+.in, .out {
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-duration: 400ms;
+}
+
+@-webkit-keyframes fade-in {
+  from { opacity: 0;} to { opacity:1; }
+}
+
+.fade.in {
+  -webkit-animation-name: fade-in;
+  z-index:5;
+}
+.fade.out {
+  z-index:0;
+}
+
+#pages > div.current {
+  display: block;
+}
+
 /* End Main Styles */
 /* Session Styles */
 /*#program-content h3 {
