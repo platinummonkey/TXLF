@@ -82,17 +82,17 @@ h1{
     -webkit-touch-callout:none;
 }
 
-#pages {
+/*#pages {
   position:relative;
-}
+}*/
 
-#pages > div {
+/*#pages > div {
   display: none;
-  position: absolute;
+  /*position: absolute;
   top:0; left:0;
-  width:100%;
-}
-
+  width:100%;*/
+/*}*/
+/*
 .in, .out {
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-duration: 400ms;
@@ -102,17 +102,17 @@ h1{
   from { opacity: 0;} to { opacity:1; }
 }
 
-.fade.in {
+.fade .in {
   -webkit-animation-name: fade-in;
   z-index:5;
 }
-.fade.out {
+.fade .out {
   z-index:0;
 }
-
-#pages > div.current {
+*/
+/*#pages > div .current {
   display: block;
-}
+}*/
 
 /* End Main Styles */
 /* Session Styles */
