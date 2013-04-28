@@ -28,15 +28,15 @@ $('#tab-bar a').on('click', function(e){
 	if(toPage.hasClass("current") || toPage === fromPage) {
 		return;
 	};
-	toPage.addClass("current fade in").one("animationend", function() { //.one("webkitAnimationEnd", function(){
+	toPage.addClass("current fade in").one("animationend webkitAnimationEnd", function() { //.one("webkitAnimationEnd", function(){
                 console.log('animation end');
-		/*//fromPage.removeClass("current fade out");
+		//fromPage.removeClass("current fade out");
                 fromPage.removeClass();
                 console.log('removed classes');
 		toPage.removeClass("fade in");
                 console.log('removed fade in');
                 //toPage.removeClass();
-                //toPage.addClass("current");*/
+                //toPage.addClass("current");
 	});
 	//fromPage.addClass("fade out");
         console.log('finish');
