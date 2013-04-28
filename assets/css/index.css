@@ -88,31 +88,43 @@ h1{
 
 #pages > div {
   display: none;
-  position: absolute;
+  /*position: absolute;
   top:0; left:0;
-  width:100%;
+  width:100%;*/
+}
+#pages > div.current {
+  /*display: block;*/
+  display: inline;
 }
 
 .in, .out {
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-duration: 400ms;
+  -animation-timing-function: ease-in-out;
+  -animation-duration: 400ms;
+}
+
+@keyframe fade-in {
+  from { opacity: 0; } to { opacity: 1; }
 }
 
 @-webkit-keyframes fade-in {
   from { opacity: 0;} to { opacity:1; }
 }
 
-.fade.in {
+@-keyframes fade-in {
+  from { opacity: 0;} to { opacity:1; }
+}
+
+.fade .in {
   -webkit-animation-name: fade-in;
+  -animation-name: fade-in;
   z-index:5;
 }
-.fade.out {
+.fade .out {
   z-index:0;
 }
 
-#pages > div.current {
-  display: block;
-}
 
 /* End Main Styles */
 /* Session Styles */
