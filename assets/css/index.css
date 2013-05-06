@@ -187,14 +187,21 @@ h1{
     width:70%;
 }
 
+/* Sponsors CSS */
 #sponsors-list {
     list-style:none;
-    padding:10px;
+    padding:0px;
 }
 #sponsors-list li{
     font-size:12px;
     overflow: hidden;
-    margin-bottom:20px;
+    /*margin-bottom:20px;*/
+    font-size: 15px;
+    padding:0px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 #sponsors-list li h2{
     font-size:14px;
@@ -203,10 +210,36 @@ h1{
 .avatar{
     margin-right:10px;
     width: 8%;
+    margin-bottom:0px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 #sponsors-list li a, #sponsors-list li span{
     float: left;
 }
 #sponsors-list li span {
     width:70%;
+}
+
+.Diamond {
+	background-color: #e1e1e1;
+}
+.Platinum {
+	background-color:#d2d2d2;
+}
+.Gold {
+	background-color:#e1e1e1;
+}
+.Silver {
+	background-color:#d2d2d2;
+}
+.Community {
+	background-color:#e1e1e1;
+}
+.Media {
+	background-color:#d2d2d2;
+}
+.Network {
+	background-color:#e1e1e1;
 }
