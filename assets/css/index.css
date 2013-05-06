@@ -186,3 +186,27 @@ h1{
 #sessions-ul li span {
     width:70%;
 }
+
+#sponsors-list {
+    list-style:none;
+    padding:10px;
+}
+#sponsors-list li{
+    font-size:12px;
+    overflow: hidden;
+    margin-bottom:20px;
+}
+#sponsors-list li h2{
+    font-size:14px;
+    margin:0;
+}
+.avatar{
+    margin-right:10px;
+    width: 8%;
+}
+#sponsors-list li a, #sponsors-list li span{
+    float: left;
+}
+#sponsors-list li span {
+    width:70%;
+}
