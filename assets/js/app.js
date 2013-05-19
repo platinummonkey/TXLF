@@ -17,6 +17,16 @@ document.addEventListener('DOMContentLoaded', scroll, false);
 	//fromPage.addClass("fade.out");
 //}
 
+// HELPER FUNCTION PROTOTYPES
+if (typeof String.prototype.startsWith != 'function') {
+  // see below for better implementation!
+  String.prototype.startsWith = function (str){
+    return this.indexOf(str) == 0;
+  };
+}
+// END HELPER FUNCTION PROTOTYPES
+
+
 $('#tab-bar a').on('click', function(e){
         console.log('button clicked');
 	e.preventDefault();
@@ -211,6 +221,40 @@ function SessionsCompare(sessionA, sessionB) {
     }
 }
 
+SessionTimeGroup = function(title) {
+	this.init(title);
+}
+
+SessionTimeGroup.prototype = {
+	init: function(title) {
+		this.sessionList = new Array();
+		this.timerange = title;
+	},
+	sessionSort: function() {
+		this.sessionList.sort(SessionsCompare);
+	},
+	addSession: function(session) {
+		this.sessionList.push(session);
+	}
+}
+
+SessionDayGroup = function(name) {
+	this.init(name);
+}
+
+SessionDayGroup.prototype = {
+	init: function(name) {
+		this.sessionList = new Array();
+		this.fulldayname = name;
+	},
+	sessionSort: function() {
+		this.sessionList.sort(SessionsCompare);
+	},
+	addSession: function(session) {
+		this.sessionList.push(session);
+	}
+}
+
 Sessions = function(data) {
     this.init(data);
 }
@@ -218,19 +262,29 @@ Sessions = function(data) {
 Sessions.prototype = {
     init: function(data) {
         this.sessionList = new Array();
+        this.days = {};
+        this.days['Fri'] = new SessionDayGroup('Friday May 31, 2013');
+        this.days['Sat'] = new SessionDayGroup('Saturday June 1, 2013');
         var me = this;
         $.each(data.nodes, function (i, node) {
-            me.sessionList.push(new Session(node.node.body, node.node.field_experience, node.node.field_session_slot, node.node.field_session_room, node.node.field_session_speakers, node.node.nid, node.node.path, node.node.title));
+            me.addSession(new Session(node.node.body, node.node.field_experience, node.node.field_session_slot, node.node.field_session_room, node.node.field_session_speakers, node.node.nid, node.node.path, node.node.title));
         });
         //console.log(this.sessionList);
         console.log('going to sort...');
         this.sessionSort();
         console.log('done sorting...');
     },
-    sessionSort: function() {
-        this.sessionList.sort(SessionsCompare);
-        //console.log(this.sessionList);
-    }
+    addSession: function(session) {
+		if (session.startDate.getDay() == 5) { // Friday
+			this.days['Fri'].addSession(session)
+		} else {
+			this.days['Sat'].addSession(session)
+		}
+	},
+	sessionSort(): function() {
+		this.days['Fri'].sessionSort();
+		this.days['Sat'].sessionSort();
+	}
 }
 // end tmp
 
