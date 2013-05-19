@@ -105,6 +105,11 @@ SessionTimeGroup.prototype = {
 	},
 	addSession: function(session) {
 		this.sessionList.push(session);
+	},
+	html: function() {
+		var output = '';
+		for (var i = 0; i < this.sessionList.length; i++) {
+			output = output + '\t\t\t' + this.sessionList[i].html() + '\n';
 	}
 }
 
@@ -132,6 +137,13 @@ SessionDayGroup.prototype = {
 			this.timegroups[timestr] = new SessionTimeGroup(timestr);
 			this.timegroups[timestr].addSession(session);
 		}
+	},
+	html: function() {
+		var output = '';
+		for (var key in this.timegroups) {
+			output = output + '\n<div id="timeslot">\n\t<h4>' + this.timegroups[key].timerange + '</h4>\n\t\t<ul id="sessions-ul">' + this.timegroups[key].html() + '\n\t\t</ul>\n</div>';
+		}
+		return output;
 	}
 }
 
