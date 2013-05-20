@@ -1,10 +1,10 @@
 /* Sessions */
-Session = function(body,experience,session_slot,session_room,session_speakers,nid,path,title) {
-    this.init(body,experience,session_slot,session_room,session_speakers,nid,path,title);
+Session = function(body,experience,session_slot,session_room,session_speakers,nid,path,title,author) {
+    this.init(body,experience,session_slot,session_room,session_speakers,nid,path,title,author);
 }
 
 Session.prototype = {
-    init: function(body,experience,session_slot,session_room,session_speakers,nid,path,title) {
+    init: function(body,experience,session_slot,session_room,session_speakers,nid,path,title,author) {
         this.body = body;
         this.experience = experience.split(', ');
         this.session_slot = session_slot;
@@ -15,6 +15,10 @@ Session.prototype = {
         this.title = title;
         this.startDate = null;
         this.endDate = null;
+        this.authorID = author;
+        this.authorPic = null;
+        this.authorName = null;
+        this.authorCompany = null;
         this.parseDate();
     },
     parseDate: function() {
@@ -55,11 +59,37 @@ Session.prototype = {
         } else {
           im = "txlflogo.png";
         }
-        return '<li class="' + this.session_room + '"<a class="avatar" href="' + im + '"><img src="' + im + '" width="50px" height="50px" alt="' + im + '"></a>';
+        return '<li class="track-' + this.session_room.slice(-1).toLowerCase() + '"><a class="avatar" href="#">' + this.getAuthorImage() + '</a><a class="avatar" href="#"><h3 class="talk_title">' + this.title + '</h3><span class="talk_speaker">' + this.session_speakers[0] + '</span></a><img src="img/track-' + this.session_room.slice(-1).toLowerCase() + '.png" class="track-bg"></li>';
     },
-    getSpeakerImage: function(username) {
-        return null;
-    }
+    getAuthorImage: function() {
+		if (this.authorID != 0 && this.authorID !="0") {
+		surl = userUrl + this.authorID + "/";
+	     $.ajax({
+	       type: 'GET',
+	        url: surl,
+	        async: false,
+	        cache: true,
+	        jsonpCallback: 'node',
+	        contentType: "application/javascript",
+	        dataType: 'jsonp',
+	        success: function(data) {
+			  console.log(data);
+			  var imgNodeId = "author-" + this.authorID;
+			  if (data.picture != null && data.picture.filename != null && data.picture.filename != "") {
+				setTimeout(function() {
+					console.log(imgNodeId + " -> " + document.getElementById(imgNodeId));
+					document.getElementById(imgNodeId).src = userImageUrl + data.picture.filename
+					}, 2000);
+			  } else {
+				  console.log("no picture for user: " + this.authorID);
+			  }
+	        },
+	        error: function(e) {
+	           console.log(e.message);
+	        }
+		});}
+		return '<img id="author-' + this.authorID + '" src="img/noauthor.gif" class="useravatar" />';
+	}
 }
 
 function SessionsCompareNID(sessionA, sessionB) {
@@ -110,6 +140,8 @@ SessionTimeGroup.prototype = {
 		var output = '';
 		for (var i = 0; i < this.sessionList.length; i++) {
 			output = output + '\t\t\t' + this.sessionList[i].html() + '\n';
+		}
+		return output;
 	}
 }
 
@@ -141,7 +173,7 @@ SessionDayGroup.prototype = {
 	html: function() {
 		var output = '';
 		for (var key in this.timegroups) {
-			output = output + '\n<div id="timeslot">\n\t<h4>' + this.timegroups[key].timerange + '</h4>\n\t\t<ul id="sessions-ul">' + this.timegroups[key].html() + '\n\t\t</ul>\n</div>';
+			output = output + '\n<div id="timeslot">\n\t<h4>' + this.timegroups[key].timerange + '</h4>\n\t\t<ul id="sessions-ul">\n' + this.timegroups[key].html() + '\t\t</ul>\n</div>';
 		}
 		return output;
 	}
@@ -158,7 +190,7 @@ Sessions.prototype = {
         this.days['Sat'] = new SessionDayGroup('Saturday June 1, 2013');
         var me = this;
         $.each(data.nodes, function (i, node) {
-            me.addSession(new Session(node.node.body, node.node.field_experience, node.node.field_session_slot, node.node.field_session_room, node.node.field_session_speakers, node.node.nid, node.node.path, node.node.title));
+            me.addSession(new Session(node.node.body, node.node.field_experience, node.node.field_session_slot, node.node.field_session_room, node.node.field_session_speakers, node.node.nid, node.node.path, node.node.title, node.node.uid));
         });
         //console.log(this.sessionList);
         console.log('going to sort...');
@@ -175,27 +207,35 @@ Sessions.prototype = {
 	sessionSort: function() {
 		this.days['Fri'].sessionSort();
 		this.days['Sat'].sessionSort();
+	},
+	html: function() {
+		var output = '<div id="daygroup">\n\t<h2>' + this.days['Fri'].fulldayname + '</h2>\n' + this.days['Fri'].html() + '\n</div>\n'
+		           + '<div id="daygroup">\n\t<h2>' + this.days['Sat'].fulldayname + '</h2>\n' + this.days['Sat'].html() + '\n</div>\n';
+		return output;
 	}
 }
 // end tmp
 
 function getSessions() {
 	console.log("Getting sessions");
-	surl = "http://2013.texaslinuxfest.org/session-schedule_mobile";
     $.ajax({
        type: 'GET',
-        url: surl,
+        url: sessionListUrl,
         async: false,
         jsonpCallback: 'sessions',
         contentType: "application/json",
         dataType: 'jsonp',
         success: function(data) {
           console.log("clearing DOM");
-		  //$("#program-content").empty();
+		  $("#program-content").empty();
 		  console.log("filling in sponsors");
 		  //console.log(data);
 		  sessions = new Sessions(data);
 		  console.log(sessions);
+		  console.log("Rendering HTML");
+		  //console.log(sessions.html());
+		  $("#program-content").append(sessions.html());
+		  setTimeout(theScroll.refresh(), 1000);
 		  /*$.each(data.nodes, function (i, node) {
 			  //console.log(node.node);
 			  sponsor = '<li class="' + node.node.field_sponsorship_level + '">'
