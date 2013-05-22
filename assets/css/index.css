@@ -6,7 +6,7 @@ html, body{
 body {
  font-family:Arial,  sans-serif;
  line-height:1.5;
- font-size:16px;
+ font-size:20px;
  background: #ffffff;
  padding:5px;
  color: #000;
@@ -29,10 +29,14 @@ footer {
     height:48px;
     background-color:#ffa215;
     border-top:1px solid #676767;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f6a423), to(#db8909));
+    background: -moz-linear-gradient(top,  #f6a423,  #db8909);
 }
 header {
     background-color:#0673be;
     border-bottom:1px solid #676767;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#078eea), to(#044d80));
+    background: -moz-linear-gradient(top,  #078eea,  #044d80);
 }
 header, footer{
     padding:0;
@@ -185,7 +189,7 @@ h1{
     /*background-color:rgba(255,255,255,0.8);*/
 }
 #sessions-ul li{
-    font-size:12px;
+    font-size:16px;
     overflow: hidden;
     padding:0px;
     padding-top:5px;
