@@ -7,11 +7,13 @@ body {
  font-family:Arial,  sans-serif;
  line-height:1.5;
  font-size:16px;
- background: #e1e1e1;
+ background: #ffffff;
  padding:5px;
  color: #000;
  word-wrap: break-word;
  -webkit-text-size-adjust: none;
+ background: url(../img/logo.svg) no-repeat top left;
+ background-size: contain;
 }
 h1, h2, h3, h4, h5, h6{ font-weight: normal; }
 p img { float: left; margin: 0 10px 5px 0; padding: 0; }
@@ -39,7 +41,7 @@ header, footer{
     font-size:20px;
     width:100%;
     text-align:center;
-    color:#e1e1e1;
+    color:#ffffff;
     font-weight:bold;
     text-shadow:0 -1px 0 rgba(0,0,0,0.5);
     line-height:45px;
@@ -60,6 +62,8 @@ h1{
     z-index:1;
     width:100%;
     padding:0;
+    background: url(../img/logo_divbg.png) white no-repeat center center;
+	background-size: contain;
 }
 
 #tab-bar{
@@ -88,12 +92,8 @@ h1{
 
 #pages > div {
   display: none;
-  /*position: absolute;
-  top:0; left:0;
-  width:100%;*/
 }
 #pages > div.current {
-  /*display: block;*/
   display: inline;
 }
 
@@ -125,76 +125,113 @@ h1{
   z-index:0;
 }
 
+#venue-content {
+	background: url(../img/logo_divbg.png) white no-repeat center center;
+	background-size: contain;
+}
 
 /* End Main Styles */
 /* Session Styles */
-/*#program-content h3 {
-    display: inline;
-    float: left;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}*/
-
 #program-content ul {
     float: left;
-    background:#e3e3e3;
+    background: url(../img/logo_divbg.png) white no-repeat center center;
+	background-size: contain;
+	/*background-color:#ffffff;*/
 }
-
-#program-content h4 {
+#program-content h2 {
+  background:#ffa215;
+  color:#ffffff;
+  text-align: center;
+  margin-bottom:0px;
+  margin-top:0px;
+}
+#program-content h4  {
   background:#676767;
   color:#e3e3e3;
   margin-bottom:0px;
   margin-top:0px;
   text-align: center;
 }
+#program-content h2 {
+  background:#ffa215;
+  color:#ffffff;
+  text-align: center;
+  margin-bottom:0px;
+  margin-top:0px;
+}
+#program-content h4  {
+  background:#676767;
+  color:#e3e3e3;
+  margin-bottom:0px;
+  margin-top:0px;
+  text-align: center;
+}
+.useravatar{
+	margin-right:10px;
+    height: 5em;
+    width: 5em;
+    margin-bottom:0px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
 #sessions-ul{
-    margin-top: 5px;
+    margin: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     list-style: none;
     padding-left: 10px;
     width: 100%;
+    /*background-color:rgba(255,255,255,0.8);*/
 }
 #sessions-ul li{
     font-size:12px;
     overflow: hidden;
+    padding:0px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-top: 0px;
     margin-bottom:5px;
     margin-right:12px;
 }
-#sessions-ul li h3{
-    font-size:14px;
-    margin:0;
+#sessions-ul li a, #sessions-ul li a img, #sessions-ul li a span, #sessions-ul li a span span, #sessions-ul li a h3 {
+    float:left;
 }
-.avatar{
-    margin-right:10px;
+#sessions-ul li a h3 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+#sessions-ul li a span span {
+    clear: both;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 2px;
 }
 .track-bg {
     float: right;
     margin-left:10px;
+    margin-right: 5px;
+    padding-left: 10px;
 }
 
-#sessions-ul li a, #sessions-ul li span, #sessions-ul li h3 {
-    float:left;
-}
-#sessions-ul li h4 {
-    float:right;
-    margin-top: 0px;
-    padding-right: 5px;
-    padding-left: 5px;
-    font-size: 20px;
-    position: 0;
-}
-#sessions-ul li span {
-    width:70%;
-}
-
+/* Sponsors CSS */
 #sponsors-list {
     list-style:none;
-    padding:10px;
+    padding:0px;
+    margin:0px;
+    width: 100%;
 }
 #sponsors-list li{
     font-size:12px;
     overflow: hidden;
-    margin-bottom:20px;
+    /*margin-bottom:20px;*/
+    font-size: 15px;
+    padding:0px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 100%;
 }
 #sponsors-list li h2{
     font-size:14px;
@@ -203,10 +240,37 @@ h1{
 .avatar{
     margin-right:10px;
     width: 8%;
+    margin-bottom:0px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
+
 #sponsors-list li a, #sponsors-list li span{
     float: left;
 }
 #sponsors-list li span {
     width:70%;
+}
+
+.Diamond {
+	background-color: #e1e1e1;
+}
+.Platinum {
+	background-color:#d2d2d2;
+}
+.Gold {
+	background-color:#e1e1e1;
+}
+.Silver {
+	background-color:#d2d2d2;
+}
+.Community {
+	background-color:#e1e1e1;
+}
+.Media {
+	background-color:#d2d2d2;
+}
+.Network {
+	background-color:#e1e1e1;
 }
