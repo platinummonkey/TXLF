@@ -28,6 +28,7 @@ function getSponsors() {
         }
      });
 	console.log('done sponsors');
+	return false;
 };
 
 addClassNameListener("sponsors-content", function(){ getSponsors(); });

@@ -78,6 +78,7 @@ var scanCode = function() {
         alert("Scan failed: " + error);
     });
     console.log('scanning');
+    return false;
 }
 
 function addClassNameListener(elemId, callback) {
