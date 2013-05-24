@@ -132,6 +132,19 @@ h1{
 #venue-content {
 	background: url(../img/logo_divbg.png) white no-repeat center center;
 	background-size: contain;
+	width: 100%;
+	margin: 0;
+}
+#venue-content p, #venue-content h3, #venue-content h2, #venue-content h4 {
+	padding-left: 1em;
+	padding-right: 1em;
+}
+#venue-content h2, #venue-content h3, #venue-content h4 {
+	text-align: center;
+}
+#venue-content iframe {
+	display: block;
+	margin: 0 auto;
 }
 
 /* End Main Styles */
