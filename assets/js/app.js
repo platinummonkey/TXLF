@@ -17,6 +17,23 @@ sessionListUrl = "http://2013.texaslinuxfest.org/session-schedule_mobile";
 
 // END URL PATTERNS
 
+function switchToPage(toPage) {
+	console.log(toPage);
+	//$("#pages .current").removeClass("current");
+    var fromPage = $("#pages .current");
+    console.log(fromPage);
+	if(toPage.hasClass("current") || toPage === fromPage) {
+		return;
+	};
+	toPage.addClass("current fade in");//.one("animationend webkitAnimationEnd", function() { //.one("webkitAnimationEnd", function(){
+    console.log('animation end');
+	//fromPage.removeClass("current fade out");
+    fromPage.removeClass();
+    console.log('removed classes');
+	toPage.removeClass("fade in");
+    console.log('removed fade in');
+    return;
+}
 
 $('#tab-bar a').on('click', function(e){
         console.log('button clicked');

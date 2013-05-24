@@ -10,7 +10,7 @@ Session.prototype = {
         this.session_slot = session_slot;
         this.session_room = session_room;
         this.session_speakers = session_speakers.split(', ');
-        this.nid = nid;
+        this.nid = parseInt(nid);
         this.path = path;
         this.title = title;
         this.startDate = null;
@@ -62,7 +62,7 @@ Session.prototype = {
         } else {
           im = "txlflogo.png";
         }
-        return '<li class="track-' + this.session_room.slice(-1).toLowerCase() + '"><a href="#">' + this.getAuthorImage() + '<span><h3 class="talk_title">' + this.title + '</h3><span class="talk_speaker">' + this.authorName + '</span></span></a><img src="img/track-' + this.session_room.slice(-1).toLowerCase() + '.png" class="track-bg"></li>';
+        return '<li class="track-' + this.session_room.slice(-1).toLowerCase() + '"><a href="javascript:void(0);" onclick="viewSession(' + this.nid + ');">' + this.getAuthorImage() + '<span><h3 class="talk_title">' + this.title + '</h3><span class="talk_speaker">' + this.authorName + '</span></span></a><img src="img/track-' + this.session_room.slice(-1).toLowerCase() + '.png" class="track-bg"></li>';
     },
     getAuthorImage: function() {
 		if (this.authorID != 0 && this.authorID !="0" && this.authorPic != "") {
@@ -123,6 +123,16 @@ SessionTimeGroup.prototype = {
 			output = output + '\t\t\t' + this.sessionList[i].html() + '\n';
 		}
 		return output;
+	},
+	getSessionById: function(nid) {
+		sessionInfo = null;
+		for (var i = 0; i < this.sessionList.length; i++) {
+			if (this.sessionList[i].nid == nid) {
+				sessionInfo = this.sessionList[i];
+				break;
+			}
+		}
+		return sessionInfo;
 	}
 }
 
@@ -157,6 +167,16 @@ SessionDayGroup.prototype = {
 			output = output + '\n<div id="timeslot">\n\t<h4>' + this.timegroups[key].timerange + '</h4>\n\t\t<ul id="sessions-ul">\n' + this.timegroups[key].html() + '\t\t</ul>\n</div>';
 		}
 		return output;
+	},
+	getSessionById: function(nid) {
+		sessionInfo = null;
+		for (var key in this.timegroups) {
+			sessionInfo = this.timegroups[key].getSessionById(nid);
+			if (sessionInfo != null) {
+				break;
+			}
+		}
+		return sessionInfo;
 	}
 }
 
@@ -198,6 +218,17 @@ Sessions.prototype = {
 		var output = '<div id="daygroup">\n\t<h2>' + this.days['Fri'].fulldayname + '</h2>\n' + this.days['Fri'].html() + '\n</div>\n'
 		           + '<div id="daygroup">\n\t<h2>' + this.days['Sat'].fulldayname + '</h2>\n' + this.days['Sat'].html() + '\n</div>\n';
 		return output;
+	},
+	getSessionById: function(nid) {
+		sessionInfo = this.days['Fri'].getSessionById(nid);
+		if (sessionInfo != null) {
+			return sessionInfo;
+		}
+		sessionInfo = this.days['Sat'].getSessionById(nid);
+		if (sessionInfo != null) {
+			return sessionInfo;
+		}
+		return null;
 	}
 }
 // end tmp
@@ -243,3 +274,53 @@ function getSessions() {
 addClassNameListener("program-content", function(){ getSessions(); });
 var sessions;
 /* End Sessions */
+
+/* Single Session View */
+function viewSession(nid) {
+	session = sessions.getSessionById(nid);
+	var uurl = 'http://2013.texaslinuxfest.org/users/';
+	console.log('switching to view session');
+	switchToPage($('#view-session'));
+	console.log('clearing DOM');
+	$("#view-session").empty();
+	var timestr = session.startDate.toTimeString().slice(0,5) + " - " + session.endDate.toTimeString().slice(0,5);
+	var roomtrack = session.session_room.slice(-1).toLowerCase()
+	var roomnum;
+	switch (roomtrack) {
+		case 'a':
+			roomnum = '101';
+			break;
+		case 'b':
+			roomnum = '102';
+			break;
+		case 'c':
+			roomnum = '103';
+			break;
+		case 'd':
+			roomnum = '105';
+			break;
+		case 'e':
+			roomnum = '106';
+			break;
+		default:
+			roomnum = 'Amphitheatre';
+	}
+	var slideshtml;
+	if (session.slides == "" ) {
+		slideshtml = 'No Slides';
+	} else {
+		slideshtml = '<a href="' + session.slides + '">Slides</a>';
+	}
+	var speakershtml = '';
+	for (var k=0; k<session.session_speakers.length; k++) {
+		speakershtml = speakershtml + '<li><a href="' + uurl + session.session_speakers[k] + '">' + session.session_speakers[k] + '</a></li>';
+	}
+	var html = '<div id="session-title">' + session.title + '</div>\n<div id="session-back-link"><a href="javascript:void(0);" onclick="switchToPage($(\'#program-content\')); getSessions();">&larr;Back</a></div>\n' + 
+	           '  <div id="session-subhead"><div id="session-time">'+ timestr + '</div><div id="session-room">Room ' + roomnum + '</div></div>\n' +
+	           '  <div id="session-content"><div id="session-author-header"><div id="session-pic"><a href="' + uurl + session.session_speakers[0] + '"><img src="' + session.authorPic + '" /></a></div>' + 
+	           '\n      <div id="session-speakers">Speakers:&nbsp;<ul>' + speakershtml + '</ul></div>\n' + 
+	           '      <div id="session-slides">' + slideshtml + '</div></div>\n' +
+	           '    <div id="session-htmlcontent"><h3>Session Information:</h3>' + session.body + '</div>\n\t</div>\n</div>';
+	$("#view-session").append(html);
+	setTimeout(theScroll.refresh(), 1000);
+}
