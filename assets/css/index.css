@@ -198,6 +198,9 @@ h1{
     margin-bottom:5px;
     margin-right:12px;
 }
+#sessions-ul a {
+	text-decoration: none;
+}
 #sessions-ul li a, #sessions-ul li a img, #sessions-ul li a span, #sessions-ul li a span span, #sessions-ul li a h3 {
     float:left;
 }
@@ -278,3 +281,100 @@ h1{
 .Network {
 	background-color:#e1e1e1;
 }
+
+/*  SESSION VIEW */
+
+#view-session {
+	position:relative;
+    float: left;
+    margin: 0;
+    background: url(../img/logo_divbg.png) white no-repeat center center;
+	background-size: contain;
+	/*background-color:#ffffff;*/
+}
+#session-title {
+    float: left;
+    background: #ffa215;
+    color: #ffffff;
+    text-align: center;
+    width: 100%;
+}
+#session-back-link {
+    position:absolute;
+    top:0;
+    left:0;
+    color: #ffffff;
+    background: #0673be;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+#session-back-link a {
+    color: #ffffff;
+    text-decoration: none;
+}
+#session-subhead {
+    float: left;
+    background: #676767;
+    color: #ffffff;
+    margin:0;
+    width: 100%;
+}
+#session-time {
+    float: left;
+    padding-left: 0.2em;
+}
+#session-room {
+    float: right;
+    padding-right: 0.2em;
+}
+#session-content {
+    clear: both;
+    width: 100%;
+}
+#session-author-header {
+    float: left;
+    width: 100%;
+}
+#session-pic {
+    float: left;
+    height: 60px;
+    width: 60px;
+    vertical-align: top;
+    padding: 0.2em;
+}
+#session-speakers {
+    list-style: none;
+    display: inline;
+    padding-left: 0.5em;
+    vertical-align:middle;
+}
+#session-speakers ul {
+    display: inline;
+    padding-left: 0.2em;
+}
+#session-speakers li {
+  display: inline;
+}
+
+#session-speakers li:after {
+  content: ", ";
+}
+#session-speakers li:last-child:after {
+    content: ""
+}
+#session-slides {
+    float:right;
+    padding-right: 0.2em;
+}
+#session-htmlcontent {
+    padding: 0.2em;
+    overflow: hidden;
+}
+#session-htmlcontent h3 {
+    text-align: center;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    color: #0673be;
+}
+
+/*  END SESSION VIEW */
