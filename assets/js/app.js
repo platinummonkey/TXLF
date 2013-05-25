@@ -68,18 +68,6 @@ function scroll(){
 }
 document.addEventListener('DOMContentLoaded', scroll, false);
 
-var scanCode = function() {
-    window.plugins.barcodeScanner.scan(
-        function(result) {
-        alert("Scanned Code: " + result.text 
-                + ". Format: " + result.format
-                + ". Cancelled: " + result.cancelled);
-    }, function(error) {
-        alert("Scan failed: " + error);
-    });
-    console.log('scanning');
-}
-
 function addClassNameListener(elemId, callback) {
     var elem = document.getElementById(elemId);
     var lastClassName = elem.className;
@@ -91,5 +79,3 @@ function addClassNameListener(elemId, callback) {
         }
     },10);
 }
-
-addClassNameListener("scan_qrcode", function(){ scanCode(); });

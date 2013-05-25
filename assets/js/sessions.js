@@ -269,6 +269,7 @@ function getSessions() {
         }
      });
 	console.log('done sessions');
+	return false;
 };
 
 addClassNameListener("program-content", function(){ getSessions(); });
@@ -323,4 +324,5 @@ function viewSession(nid) {
 	           '    <div id="session-htmlcontent"><h3>Session Information:</h3>' + session.body + '</div>\n\t</div>\n</div>';
 	$("#view-session").append(html);
 	setTimeout(theScroll.refresh(), 1000);
+	return false;
 }
