@@ -85,7 +85,7 @@ function createContact(name, phone_work, phone_mobile, email, website, title, co
 	
 	// mark them as TXLF2013
 	contact.note = "TXLF 2013";
-	contact.categories = [new ContactField('work', "TXLF 2013", false);
+	contact.categories = [new ContactField('work', "TXLF 2013", false)];
 	
 	contact.save(); // save the contact
 	return contact;
