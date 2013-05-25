@@ -94,10 +94,10 @@ function createContact(name, phone_work, phone_mobile, email, website, title, co
 var scanCode = function() {
     window.plugins.barcodeScanner.scan(
         function(result) {
-        console.log("Scanned Code: " + result.text 
+        alert("Scanned Code: " + result.text 
                 + ". Format: " + result.format
                 + ". Cancelled: " + result.cancelled);
-        var jc = $.parseJSON(result.text);
+        var jc = JSON && JSON.parse(result.text) || $.parseJSON(result.text);
         alert("got contact: " + jc.n + " <" + jc.e + ">");
         var newcontact = createContact(jc.n, jc.pw, jc.pm, jc.e, jc.www, jc.t, jc.c, jc.adr);
         alert("contact created");
