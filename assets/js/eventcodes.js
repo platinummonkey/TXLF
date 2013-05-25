@@ -87,8 +87,12 @@ function createContact(name, phone_work, phone_mobile, email, website, title, co
 	contact.note = "TXLF 2013";
 	contact.categories = [new ContactField('work', "TXLF 2013", false)];
 	
-	contact.save(); // save the contact
-	return contact;
+	contact.save(function(success) {
+		console.log("Save success");
+	}, function(error) {
+		console.log("Error saving contact");
+		alert("Error saving contact" + error.code);
+	}); // save the contact
 }
 
 var scanCode = function() {
@@ -97,12 +101,33 @@ var scanCode = function() {
         console.log("Scanned Code: " + result.text 
                 + ". Format: " + result.format
                 + ". Cancelled: " + result.cancelled);
-        var jc = JSON && JSON.parse(result.text) || $.parseJSON(result.text);
-        console.log("got contact");
-        console.log(jc);
-        var newcontact = createContact(jc.n, jc.pw, jc.pm, jc.e, jc.www, jc.t, jc.c, jc.adr);
-        console.log("contact created");
-        console.log(newcontact);
+        try {
+			var jc = JSON && JSON.parse(result.text) || $.parseJSON(result.text);
+			console.log("got contact");
+			console.log(jc);
+			createContact(jc.n, jc.pw, jc.pm, jc.e, jc.www, jc.t, jc.c, jc.adr);
+			console.log("contact created");
+			$("#scan_qrcode").empty();
+			var htmlwww = "N/A";
+			if (jc.www != null && jc.www != "") {
+				htmlwww = '<a href="' + jc.www + '">' + jc.www + '</a>';
+			}
+			var html = "<h4>" + jc.name + "</h4>\n\t<ul>\n" +
+					"\t\t<li><span>Title:</span> " + (jc.t || "N/A") + "</li>\n" +
+					"\t\t<li><span>Company:</span> " + (jc.c || "N/A") + "</li>\n" +
+					"\t\t<li><span>Work Phone:</span> " + (jc.pw || "N/A") + "</li>\n" +
+					"\t\t<li><span>Mobile Phone:</span> " + (jc.pm || "N/A") + "</li>\n" +
+					"\t\t<li><span>Email:</span> " + (jc.e || "N/A") + "</li>\n" +
+					"\t\t<li><span>Address:</span> " + (jc.adr || "N/A") + "</li>\n" +
+					"\t\t<li><span>Website:</span> " + htmlwww + "</li>\n" +
+					"\t</ul>\n\t<p>This contact has been added to your contacts and tagged with TXLF2013</p>" +
+					"\n</div>";
+			$("#scan_qrcode").append(html);
+		} catch (err) {
+			// error processing qr code
+			console.log("Error processing badge: " + err)
+			alert("Corrupt Badge");
+		}
     }, function(error) {
         alert("Scan failed: " + error);
     });
