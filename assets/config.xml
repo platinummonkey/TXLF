@@ -47,4 +47,7 @@
     <gap:splash src="res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone" />
 
     <gap:plugin name="BarcodeScanner" /> <!-- latest release -->
+    <gap:plugin name="Storage" />
+    <gap:plugin name="File" /> 
+    <gap:plugin name="Contacts" />
 </widget>
