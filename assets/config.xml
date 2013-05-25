@@ -2,7 +2,7 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id = "org.texaslinuxfest.app"
-        version = "2013.2">
+        version = "2013.3">
     <name>Texas Linux Festival</name>
 
     <description>
@@ -14,6 +14,10 @@
     </author>
 
     <feature name="http://api.phonegap.com/1.0/device" />
+    <feature name="http://api.phonegap.com/1.0/camera"/>
+    <feature name="http://api.phonegap.com/1.0/contacts"/>
+    <feature name="http://api.phonegap.com/1.0/file"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
 
     <preference name="phonegap-version" value="2.7.0" />
     <preference name="orientation" value="default" />
