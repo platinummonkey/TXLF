@@ -94,13 +94,15 @@ function createContact(name, phone_work, phone_mobile, email, website, title, co
 var scanCode = function() {
     window.plugins.barcodeScanner.scan(
         function(result) {
-        alert("Scanned Code: " + result.text 
+        console.log("Scanned Code: " + result.text 
                 + ". Format: " + result.format
                 + ". Cancelled: " + result.cancelled);
         var jc = JSON && JSON.parse(result.text) || $.parseJSON(result.text);
-        alert("got contact: " + jc.n + " <" + jc.e + ">");
+        console.log("got contact");
+        console.log(jc);
         var newcontact = createContact(jc.n, jc.pw, jc.pm, jc.e, jc.www, jc.t, jc.c, jc.adr);
-        alert("contact created");
+        console.log("contact created");
+        console.log(newcontact);
     }, function(error) {
         alert("Scan failed: " + error);
     });
