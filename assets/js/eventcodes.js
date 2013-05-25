@@ -98,7 +98,9 @@ var scanCode = function() {
                 + ". Format: " + result.format
                 + ". Cancelled: " + result.cancelled);
         var jc = $.parseJSON(result.text);
+        alert("got contact: " + jc.n + " <" + jc.e + ">");
         var newcontact = createContact(jc.n, jc.pw, jc.pm, jc.e, jc.www, jc.t, jc.c, jc.adr);
+        alert("contact created");
     }, function(error) {
         alert("Scan failed: " + error);
     });
