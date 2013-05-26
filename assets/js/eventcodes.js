@@ -112,7 +112,7 @@ var scanCode = function() {
 			if (jc.www != null && jc.www != "") {
 				htmlwww = '<a href="' + jc.www + '">' + jc.www + '</a>';
 			}
-			var html = "<h4>" + jc.name + "</h4>\n\t<ul>\n" +
+			var html = "<h4>" + (jc.n || "No Name Given") + "</h4>\n\t<ul>\n" +
 					"\t\t<li><span>Title:</span> " + (jc.t || "N/A") + "</li>\n" +
 					"\t\t<li><span>Company:</span> " + (jc.c || "N/A") + "</li>\n" +
 					"\t\t<li><span>Work Phone:</span> " + (jc.pw || "N/A") + "</li>\n" +

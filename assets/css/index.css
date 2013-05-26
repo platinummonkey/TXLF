@@ -142,7 +142,7 @@ h1{
 #venue-content h2, #venue-content h3, #venue-content h4 {
 	text-align: center;
 }
-#venue-content iframe {
+#venue-content iframe, #venue-content img {
 	display: block;
 	margin: 0 auto;
 }
@@ -257,45 +257,43 @@ h1{
     font-size:14px;
     margin:0;
 }
-.avatar{
+.avatar {
     margin-right:10px;
-    width: 8%;
+    /*width: 8%;*/
+    width: 100px;
     margin-bottom:0px;
     padding-left: 10px;
     padding-bottom: 0px;
     padding-top: 0px;
 }
 
-#sponsors-list li a, #sponsors-list li span{
+#sponsors-list li a, #sponsors-list li span, #sponsors-list li div {
     float: left;
-}
-#sponsors-list li span {
-    width:70%;
 }
 
 .Diamond {
 	background-color: #e1e1e1;
 }
 .Platinum {
-	background-color:#d2d2d2;
+	background-color:#ffffff;
 }
 .Gold {
 	background-color:#e1e1e1;
 }
 .Silver {
-	background-color:#d2d2d2;
+	background-color:#ffffff;
 }
 .Community {
 	background-color:#e1e1e1;
 }
 .Media {
-	background-color:#d2d2d2;
+	background-color:#ffffff;
 }
 .Network {
 	background-color:#e1e1e1;
 }
 
-/*  SESSION VIEW */
+/*  SESSIONS VIEW */
 
 #view-session {
 	position:relative;
@@ -391,3 +389,48 @@ h1{
 }
 
 /*  END SESSION VIEW */
+
+/* Contact View from QR Code Scan */
+#scan_qrcode {
+    float: left;
+    width:100%;
+    overflow: hidden;
+    margin: 0;
+    background: url(../img/logo_divbg.png) white no-repeat center center;
+	background-size: contain;
+}
+#scan_qrcode h4 {
+    text-align: center;
+    background: #ffa215;
+    color: #ffffff;
+    width: 100%;
+    margin: 0;
+}
+#scan_qrcode h4 span {
+    text-decoration: none;
+}
+#scan_qrcode ul {
+    list-style: none;
+}
+#scan_qrcode li span {
+    text-decoration: bold;
+    color: #;
+}
+#scan_qrcode p {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+/* Loading Animation */
+.loading {
+	width: 100%;
+	height: auto;
+	text-align: center;
+	padding-top:6em;
+	padding-bottom:6em;
+	background-color:rgba(255,255,255,0.8);
+}
+.loading img {
+	width: 100px;
+	height: 100px;
+}
