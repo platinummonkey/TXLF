@@ -254,15 +254,6 @@ function getSessions() {
 		  //console.log(sessions.html());
 		  $("#program-content").append(sessions.html());
 		  setTimeout(theScroll.refresh(), 1000);
-		  /*$.each(data.nodes, function (i, node) {
-			  //console.log(node.node);
-			  sponsor = '<li class="' + node.node.field_sponsorship_level + '">'
-					    + '<a class="avatar" href="' + node.node.field_sponsor_link + '"><img src="' + node.node.field_sponsor_logo + '" alt="' + node.node.title + '" /></a>'
-					    + '<a href="' + node.node.field_sponsor_link + '">' + node.node.title + '</a><br />'
-					    + '<span class="sponsorlevel">' + node.node.field_sponsorship_level + ' Sponsor - ' + node.node.body + '...</span></li>';
-			  $("#program-content").append(sponsor);
-			  setTimeout(theScroll.refresh(), 1000);
-		  });*/
         },
         error: function(e) {
            console.log(e.message);
@@ -318,7 +309,7 @@ function viewSession(nid) {
 	}
 	var html = '<div id="session-title">' + session.title + '</div>\n<div id="session-back-link"><a href="javascript:void(0);" onclick="switchToPage($(\'#program-content\')); getSessions();">&larr;Back</a></div>\n' + 
 	           '  <div id="session-subhead"><div id="session-time">'+ timestr + '</div><div id="session-room">Room ' + roomnum + '</div></div>\n' +
-	           '  <div id="session-content"><div id="session-author-header"><div id="session-pic"><a href="' + uurl + session.session_speakers[0] + '"><img src="' + session.authorPic + '" /></a></div>' + 
+	           '  <div id="session-content"><div id="session-author-header"><div id="session-pic"><a class="link" href="' + uurl + session.session_speakers[0] + '"><img src="' + session.authorPic + '" /></a></div>' + 
 	           '\n      <div id="session-speakers">Speakers:&nbsp;<ul>' + speakershtml + '</ul></div>\n' + 
 	           '      <div id="session-slides">' + slideshtml + '</div></div>\n' +
 	           '    <div id="session-htmlcontent"><h3>Session Information:</h3>' + session.body + '</div>\n\t</div>\n</div>';

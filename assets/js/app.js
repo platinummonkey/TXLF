@@ -17,10 +17,16 @@ sessionListUrl = "http://2013.texaslinuxfest.org/session-schedule_mobile";
 
 // END URL PATTERNS
 
+// back button support
+var LastPage = new Array();
+
 function switchToPage(toPage) {
 	console.log(toPage);
 	//$("#pages .current").removeClass("current");
     var fromPage = $("#pages .current");
+    if (fromPage != undefined) {
+		LastPage.push(fromPage);
+	}
     console.log(fromPage);
 	if(toPage.hasClass("current") || toPage === fromPage) {
 		return;
@@ -65,8 +71,17 @@ $('#tab-bar a').on('click', function(e){
 var theScroll;
 function scroll(){
     theScroll = new iScroll('wrapper');
+    theScroll.refresh()
+    document.addEventListener('backbuttom', backPage, false);
 }
+
+function rescroll() {
+	theScroll.refresh()
+}
+
 document.addEventListener('DOMContentLoaded', scroll, false);
+document.addEventListener('deviceready', rescroll, false);
+
 
 function addClassNameListener(elemId, callback) {
     var elem = document.getElementById(elemId);
@@ -79,3 +94,24 @@ function addClassNameListener(elemId, callback) {
         }
     },10);
 }
+
+function backPage() {
+	if (LastPage.length > 0) {
+		var newpage = LastPage.pop();
+		switchToPage(newpage);
+		LastPage.pop(); // have to re-pop it to get rid of duplicates.
+	}
+	setTimeout(theScroll.refresh(), 1000);
+	return false;
+}
+
+// loading external links in regular browser
+function loadURL(url) {
+	navigator.app.loadUrl(url, {openExternal:true});
+	return false;
+}
+
+$('.link').live('tap', function() {
+	url = $(this).attr("rel");
+	loadURL(url);
+});
