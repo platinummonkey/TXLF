@@ -271,26 +271,11 @@ h1{
     float: left;
 }
 
-.Diamond {
+.Diamond, .Gold, .Community, .Network {
 	background-color: #e1e1e1;
 }
-.Platinum {
+.Platinum, .Silver, .Media {
 	background-color:#ffffff;
-}
-.Gold {
-	background-color:#e1e1e1;
-}
-.Silver {
-	background-color:#ffffff;
-}
-.Community {
-	background-color:#e1e1e1;
-}
-.Media {
-	background-color:#ffffff;
-}
-.Network {
-	background-color:#e1e1e1;
 }
 
 /*  SESSIONS VIEW */
