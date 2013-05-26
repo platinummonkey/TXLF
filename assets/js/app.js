@@ -11,11 +11,41 @@ if (typeof String.prototype.startsWith != 'function') {
 
 // CONSTANT URL PATTERNS
 userUrl = "http://2013.texaslinuxfest.org/mobile_services/user/";
+userUrlNormal = "http://2013.texaslinuxfest.org/user/";
 fileUrl = "http://2013.texaslinuxfest.org/sites/default/files/";
 userImageUrl = "http://2013.texaslinuxfest.org/sites/default/files/pictures/";
 sessionListUrl = "http://2013.texaslinuxfest.org/session-schedule_mobile";
 
 // END URL PATTERNS
+
+// customize Array.forEach
+(function() {
+  // Define StopIteration as part of the global scope if it
+  // isn't already defined.
+  if(typeof StopIteration == "undefined") {
+    StopIteration = new Error("StopIteration");
+  }
+
+  // The original version of Array.prototype.forEach.
+  var oldForEach = Array.prototype.forEach;
+
+  // If forEach actually exists, define forEach so you can
+  // break out of it by throwing StopIteration.  Allow
+  // other errors will be thrown as normal.
+  if(oldForEach) {
+    Array.prototype.forEach = function() {
+      try {
+        oldForEach.apply(this, [].slice.call(arguments, 0));
+      }
+      catch(e) {
+        if(e !== StopIteration) {
+          throw e;
+        }
+      }
+    };
+  }
+})();
+//end Array.forEach
 
 // back button support
 var LastPage = new Array();

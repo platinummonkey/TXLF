@@ -1,23 +1,23 @@
 /* Sessions */
-Session = function(body,experience,session_slot,session_room,session_speakers,nid,path,title,authorid,authorPic,authorName,authorCompany,authorWebsite,slides) {
-    this.init(body,experience,session_slot,session_room,session_speakers,nid,path,title,authorid,authorPic,authorName,authorCompany,authorWebsite,slides);
+Session = function(body,experience,session_slot,session_room,nid,path,title,authorid,authorPic,authorName,authorCompany,authorWebsite,authorBio,slides) {
+    this.init(body,experience,session_slot,session_room,nid,path,title,authorid,authorPic,authorName,authorCompany,authorWebsite,authorBio,slides);
 }
 
 Session.prototype = {
-    init: function(body,experience,session_slot,session_room,session_speakers,nid,path,title,authorid,authorPic,authorName,authorCompany,authorWebsite,slides) {
+    init: function(body,experience,session_slot,session_room,nid,path,title,authorid,authorPic,authorName,authorCompany,authorWebsite,authorBio,slides) {
         this.body = body;
         this.experience = experience.split(', ');
         this.session_slot = session_slot;
         this.session_room = session_room;
-        this.session_speakers = session_speakers.split(', ');
         this.nid = parseInt(nid);
         this.path = path;
         this.title = title;
         this.startDate = null;
         this.endDate = null;
-        this.authorID = authorid;
-        this.authorPic = authorPic;
-        this.authorName = authorName;
+        this.authorID = [authorid];
+        this.authorPic = [authorPic];
+        this.authorName = [authorName];
+        this.authorBio = [authorBio];
         this.authorCompany = authorCompany;
         this.authorWebsite = authorWebsite;
         this.slides = slides;
@@ -56,21 +56,22 @@ Session.prototype = {
         this.endDate = new Date(endparts[2], (endparts[0] -1), endparts[1], endpartsTime[0], endpartsTime[1]);
     },
     html: function() {
-        if (this.session_speakers.length > 0) {
-          speaker = this.session_speakers[0]
-          im = "#";
-        } else {
-          im = "txlflogo.png";
-        }
-        return '<li class="track-' + this.session_room.slice(-1).toLowerCase() + '"><a href="javascript:void(0);" onclick="viewSession(' + this.nid + ');">' + this.getAuthorImage() + '<span><h3 class="talk_title">' + this.title + '</h3><span class="talk_speaker">' + this.authorName + '</span></span></a><img src="img/track-' + this.session_room.slice(-1).toLowerCase() + '.png" class="track-bg"></li>';
+        return '<li class="track-' + this.session_room.slice(-1).toLowerCase() + '"><a href="javascript:void(0);" onclick="viewSession(' + this.nid + ');">' + this.getAuthorImage() + '<span><h3 class="talk_title">' + this.title + '</h3><span class="talk_speaker">' + this.authorName[0] + '</span></span></a><img src="img/track-' + this.session_room.slice(-1).toLowerCase() + '.png" class="track-bg"></li>';
     },
     getAuthorImage: function() {
-		if (this.authorID != 0 && this.authorID !="0" && this.authorPic != "") {
-			return '<img src="' + this.authorPic + '" class="useravatar" />';
+		
+		if (this.authorID[0] != 0 && this.authorID[0] !="0" && this.authorPic[0] != "") {
+			return '<img src="' + this.authorPic[0] + '" class="useravatar" />';
 		} else {
 			return '<img src="img/noauthor.gif" class="useravatar" />';
 		}
-	}
+	},
+    joinSession: function(ses2) {
+        this.authorID.push(ses2.authorID[0]);
+        this.authorPic.push(ses2.authorPic[0]);
+        this.authorName.push(ses2.authorName[0]);
+        this.authorBio.push(ses2.authorBio[0]);
+    }
 }
 
 function SessionsCompareNID(sessionA, sessionB) {
@@ -113,25 +114,41 @@ SessionTimeGroup.prototype = {
 	},
 	sessionSort: function() {
 		this.sessionList.sort(SessionsCompareRoom);
+		// merge duplicates (we know they will be next to each other)
+		for (var i=0; i<this.sessionList.length-1; i++) {
+			if ( this.sessionList[i].nid == this.sessionList[i+1].nid ) {
+				this.sessionList[i+1].joinSession(this.sessionList[i]);
+				delete this.sessionList[i];
+			}
+		}
 	},
 	addSession: function(session) {
 		this.sessionList.push(session);
 	},
 	html: function() {
 		var output = '';
-		for (var i = 0; i < this.sessionList.length; i++) {
+		this.sessionList.forEach( function (ses) {
+			output = output + '\t\t\t' + ses.html() + '\n';
+		});
+		/*for (var i = 0; i < this.sessionList.length; i++) {
 			output = output + '\t\t\t' + this.sessionList[i].html() + '\n';
-		}
+		}*/
 		return output;
 	},
 	getSessionById: function(nid) {
 		sessionInfo = null;
-		for (var i = 0; i < this.sessionList.length; i++) {
+		this.sessionList.forEach( function (ses) {
+			if (ses.nid == nid) {
+				sessionInfo = ses;
+				throw StopIteration;
+			}
+		});
+		/*for (var i = 0; i < this.sessionList.length; i++) {
 			if (this.sessionList[i].nid == nid) {
 				sessionInfo = this.sessionList[i];
 				break;
 			}
-		}
+		}*/
 		return sessionInfo;
 	}
 }
@@ -192,11 +209,11 @@ Sessions.prototype = {
         var me = this;
         $.each(data.nodes, function (i, node) { //id,authorPic,authorName,authorCompany,authorWebsite,slides
             me.addSession(new Session(node.node.body, node.node.field_experience, node.node.field_session_slot, 
-                                      node.node.field_session_room, node.node.field_session_speakers, node.node.nid,
-                                      node.node.path, node.node.title, node.node.uid, node.node.picture,
+                                      node.node.field_session_room, node.node.nid,node.node.path, node.node.title,
+                                      node.node.uid_1, node.node.picture,
                                       node.node.field_profile_first_name + " " + node.node.field_profile_last_name,
                                       node.node.field_profile_company, node.node.field_profile_website,
-                                      node.node.uri));
+                                      node.node.field_profile_bio, node.node.uri));
         });
         //console.log(this.sessionList);
         console.log('going to sort...');
@@ -270,7 +287,6 @@ var sessions;
 /* Single Session View */
 function viewSession(nid) {
 	session = sessions.getSessionById(nid);
-	var uurl = 'http://2013.texaslinuxfest.org/users/';
 	console.log('switching to view session');
 	switchToPage($('#view-session'));
 	console.log('clearing DOM');
@@ -304,12 +320,12 @@ function viewSession(nid) {
 		slideshtml = '<a href="' + session.slides + '">Slides</a>';
 	}
 	var speakershtml = '';
-	for (var k=0; k<session.session_speakers.length; k++) {
-		speakershtml = speakershtml + '<li><a href="' + uurl + session.session_speakers[k] + '">' + session.session_speakers[k] + '</a></li>';
+	for (var k=0; k<session.authorName.length; k++) {
+		speakershtml = speakershtml + '<li><a class="link" href="' + userUrlNormal + session.authorID[k] + '">' + session.authorName[k] + '</a></li>';
 	}
 	var html = '<div id="session-title">' + session.title + '</div>\n<div id="session-back-link"><a href="javascript:void(0);" onclick="switchToPage($(\'#program-content\')); getSessions();">&larr;Back</a></div>\n' + 
 	           '  <div id="session-subhead"><div id="session-time">'+ timestr + '</div><div id="session-room">Room ' + roomnum + '</div></div>\n' +
-	           '  <div id="session-content"><div id="session-author-header"><div id="session-pic"><a class="link" href="' + uurl + session.session_speakers[0] + '"><img src="' + session.authorPic + '" /></a></div>' + 
+	           '  <div id="session-content"><div id="session-author-header"><div id="session-pic"><a class="link" href="' + userUrlNormal + session.authorID[0] + '"><img src="' + session.authorPic[0] + '" /></a></div>' + 
 	           '\n      <div id="session-speakers">Speakers:&nbsp;<ul>' + speakershtml + '</ul></div>\n' + 
 	           '      <div id="session-slides">' + slideshtml + '</div></div>\n' +
 	           '    <div id="session-htmlcontent"><h3>Session Information:</h3>' + session.body + '</div>\n\t</div>\n</div>';

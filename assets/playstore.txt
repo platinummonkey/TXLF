@@ -1,0 +1,24 @@
+Title
+Texas Linux Festival
+
+Description:
+Texas Linux Festival 2013 Mobile Program and Badge Scanner
+
+Promo text:
+Texas Linux Festival 2013 is May 31 - June 1! See you there!
+
+Recent changes:
+Release v2013.0
+
+Screenshots, Logo (512x512 PNG), Feature Graphic (1024w x 500h PNG), Promo Graphic (180w x 120h PNG)
+
+Categorization:
+  Applications > Social > Everyone
+
+Website:
+http://texaslinuxfest.org
+
+Email:
+info@texaslinuxfest.org
+
+No Privacy Policy
