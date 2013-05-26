@@ -123,13 +123,16 @@ var scanCode = function() {
 					"\t</ul>\n\t<p>This contact has been added to your contacts and tagged with TXLF2013</p>" +
 					"\n</div>";
 			$("#scan_qrcode").append(html);
+			return false;
 		} catch (err) {
 			// error processing qr code
 			console.log("Error processing badge: " + err)
-			alert("Corrupt Badge");
+			alert("Scan failed");
+			return false;
 		}
     }, function(error) {
-        alert("Scan failed: " + error);
+        alert("Scan failed");
+        return false;
     });
     console.log('scanning');
     return false;
