@@ -23,3 +23,4 @@ cubiq-iscroll/
 
 # not gunna happen
 *.keystore
+keystore.pass
